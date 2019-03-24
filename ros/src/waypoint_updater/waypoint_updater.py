@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 import rospy
+import numpy as np
+from scipy.spatial import KDTree
 from geometry_msgs.msg import PoseStamped
 from styx_msgs.msg import Lane, Waypoint
-
+from std_msgs.msg import Int32
 import math
 
 '''
@@ -47,7 +49,7 @@ class WaypointUpdater(object):
 	rate = rospy.Rate(50)
 	while not rospy.is_shutdown():
 	   if self.pose and self.base_waypoints:   	
-	       closest_waypoint_idx	= 1 #self.get_closest_waypoint_idx()
+	       closest_waypoint_idx	= self.get_closest_waypoint_idx()
 	       self.publish_waypoints(closest_waypoint_idx)
            rate.sleep()	  
 
@@ -65,7 +67,11 @@ class WaypointUpdater(object):
     def waypoints_cb(self, waypoints):
         # TODO: Implement
         self.base_waypoints = waypoints
-        pass
+	 if not self.waypoints_2d:
+	    self.waypoints_2d = [[waypoint.pose.pose.position.x, waypoint.pose.pose.position.y] for waypoint in waypoints.waypoints]
+	    self.waypoint_tree = KDTree(self.waypoints_2d)
+		
+        #pass
 
     def traffic_cb(self, msg):
         # TODO: Callback for /traffic_waypoint message. Implement
