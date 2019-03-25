@@ -5,7 +5,7 @@ import numpy as np
 class TLClassifier(object):
     def __init__(self):
         #TODO load classifier
-        #self.model = load_model('light_classifier_model.h5')
+        
         pass
 
     def get_classification(self, image):
@@ -18,20 +18,20 @@ class TLClassifier(object):
             int: ID of traffic light color (specified in styx_msgs/TrafficLight)
 
         """
-        #TODO (denise) implement yellow and green and compare areas
+        
         result = TrafficLight.UNKNOWN
-        output = image.copy()
+       
         red = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
 
-        lower_red = np.array([0,50,50])
-        upper_red = np.array([10,255,255])
-        red1 = cv2.inRange(red, lower_red , upper_red)
+        l_red = np.array([0,50,50])
+        h_red = np.array([10,255,255])
+        red1 = cv2.inRange(red, l_red , h_red)
 
 
-        lower_red = np.array([170,50,50])
-        upper_red = np.array([180,255,255])
-        red2 = cv2.inRange(red, lower_red , upper_red)
+        l_red = np.array([170,50,50])
+        h_red = np.array([180,255,255])
+        red2 = cv2.inRange(red, l_red , h_red)
 
         converted_img = cv2.addWeighted(red1, 1.0, red2, 1.0, 0.0)
 
