@@ -23,15 +23,15 @@ class Controller(object):
         # TODO: Implement
         self.yaw_controller = YawController(wheel_base, steer_ratio, 0.1, max_lat_accel, max_steer_angle)
 
-        kp = 0.3
+        kp = 0.35
         ki = 0.1
         kd = 0.
         mn = 0. # Minimum throttle value
-        mx = 0.2 # Maximum throttle value
+        mx = 0.21 # Maximum throttle value
         self.throttle_controller = PID(kp, ki, kd, mn, mx)
 
-        tau = 0.5 # 1/(2pi*tau) = cutoff frequency
-        ts = 0.02 # Sample time
+        tau = 0.5 
+        ts = 0.02 # Sample time corresponding to 50 Hz
         self.vel_lpf = LowPassFilter(tau, ts)
 
         self.vehicle_mass = vehicle_mass
@@ -67,7 +67,7 @@ class Controller(object):
 
     	if linear_vel == 0. and current_vel < 0.1:
     		throttle = 0
-    		brake = 400 #N-m - to hold the car in place if we stopped at a light. Acceleration ~ 1m/s^2
+    		brake = 390 #N-m - stop the car at the signal. Acceleration ~ 1m/s^2
 
         elif throttle < .1 and vel_error < 0:
             throttle = 0
