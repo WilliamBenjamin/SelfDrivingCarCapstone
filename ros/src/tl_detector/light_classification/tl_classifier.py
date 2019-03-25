@@ -38,7 +38,7 @@ class TLClassifier(object):
         blur_img = cv2.GaussianBlur(converted_img,(15,15),0)
 
 
-        circles = cv2.HoughCircles(blur_img,cv2.HOUGH_GRADIENT,0.5,41, param1=70,param2=30,minRadius=5,maxRadius=150)
+        circles = cv2.HoughCircles(blur_img,cv2.HOUGH_GRADIENT,0.5,41, param1=70,param2=30,minRadius=15,maxRadius=150)
 
         found = False 
         if circles is not None:
