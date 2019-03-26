@@ -23,10 +23,9 @@ Please note that our simulator also provides the exact location of traffic light
 current status in `/vehicle/traffic_lights` message. You can use this message to build this node
 as well as to verify your TL classifier.
 
-TODO (for Yousuf and Aaron): Stopline location for each traffic light.
 '''
 
-LOOKAHEAD_WPS = 200 # Number of waypoints we will publish. You can change this number
+LOOKAHEAD_WPS = 200 # Number of waypoints we will publish.
 
 MAX_DECEL = 0.5
 
@@ -55,7 +54,6 @@ class WaypointUpdater(object):
 	rate = rospy.Rate(50)
 	while not rospy.is_shutdown():
 	   if self.pose and self.base_lane:   	
-	       #closest_waypoint_idx	= self.get_closest_waypoint_idx()
 	       self.publish_waypoints()
            rate.sleep()	  
 
@@ -67,7 +65,7 @@ class WaypointUpdater(object):
 	closest_coord = self.waypoints_2d[closest_idx]
 	prev_coord = self.waypoints_2d[closest_idx-1]
 		
-	    # Equation for hyperplane through closest_coords
+	# Equation for hyperplane through closest_coords
 	cl_vect = np.array(closest_coord)
 	prev_vect = np.array(prev_coord)
 	pos_vect = np.array([x,y])
@@ -94,8 +92,8 @@ class WaypointUpdater(object):
 
     	self.final_waypoints_pub.publish(lane)	
 
-    # Important function
-    # Warning: Do not modify the original base_waypoints list (that message comes only once)
+   
+    # function to start deceleration once stop line found
     def decelerate_waypoints(self, waypoints, closest_idx):
         temp = []
         for i , wp in enumerate(waypoints):
