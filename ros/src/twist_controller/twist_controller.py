@@ -7,12 +7,14 @@ GAS_DENSITY = 2.858
 ONE_MPH = 0.44704
 
 '''
-This file defines the Controller class that performs the calculations to get the throttle, steering and brake inputs.
-The control function takes the current velocity, linear velocity, angular velocity, dbw enabled flag;
-and returns the throttle, brake and steering commands
-It uses functions from the YawController class in yaw_controller.py to calculate the steering and functions from PID class in PID.py to adjust the
-throttle depending on the velocity error.
-The brake torque is calculated based on the velocity error and throttle values. If the vehicle is stopped i.e. the reference linear velocity = 0 and the current velocity is below 0.1, the brake torque is a constant 400 N-m, else if the reference velocity is lower than the current velocity & the throttle input is below 0.1, the brake torque is calculated based on the deceleration required, the mass of the vehicle and the wheel radius
+The file defines the Controller class that calculates the throttle, steering and brake inputs.
+The inputs to the functions are current velocity, linear velocity, angular velocity, dbw enabled flag;
+and the function computes/returns the throttle, brake and steering commands
+This module uses functions from the YawController class in yaw_controller.py to calculate the steering and functions 
+from PID class in PID.py to adjust the throttle depending on the velocity error. The brake torque is calculated based on the velocity error and throttle values. 
+If the vehicle is stopped i.e. the reference linear velocity = 0 and the current velocity is below 0.1, the brake torque is a constant 390 N-m, 
+else if the reference velocity is lower than the current velocity & the throttle input is below 0.1, the brake torque 
+is calculated based on the deceleration required, the mass of the vehicle and the wheel radius
 It returns the calculated values only if the dbw module is enabled, else it returns a 0 value for all commands.
 '''
 
