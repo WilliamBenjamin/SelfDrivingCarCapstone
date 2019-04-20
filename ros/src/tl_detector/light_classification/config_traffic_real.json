@@ -1,0 +1,40 @@
+{
+    "model" : {
+        "min_input_size":       288,
+        "max_input_size":       500,
+        "anchors":              [5,17, 9,27, 13,40, 18,55, 23,74, 30,88, 37,108, 44,122, 48,142],
+        "labels":               ["Green","Red"]
+    },
+
+    "train": {
+        "train_image_folder":   "/home/william/GoogleDrive/Projects/UdacityCapstone/code/keras-yolo3/traffic_lights_real/images/",
+        "train_annot_folder":   "/home/william/GoogleDrive/Projects/UdacityCapstone/code/keras-yolo3/traffic_lights_real/annotations/",
+        "cache_name":           "traffic_real_train.pkl",
+
+        "train_times":          3,
+        "batch_size":           16,
+        "learning_rate":        1e-4,
+        "nb_epochs":            100,
+        "warmup_epochs":        3,
+        "ignore_thresh":        0.5,
+        "gpus":                 "0,1",
+
+        "grid_scales":          [1,1,1],
+        "obj_scale":            5,
+        "noobj_scale":          1,
+        "xywh_scale":           1,
+        "class_scale":          1,
+
+        "tensorboard_dir":      "log_traffic_real",
+        "saved_weights_name":   "./light_classification/traffic_real.h5",
+        "debug":                true
+    },
+
+    "valid": {
+        "valid_image_folder":   "",
+        "valid_annot_folder":   "",
+        "cache_name":           "",
+
+        "valid_times":          1
+    }
+}

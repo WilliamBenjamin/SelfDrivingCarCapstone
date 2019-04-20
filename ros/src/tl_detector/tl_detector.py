@@ -7,6 +7,7 @@ from styx_msgs.msg import Lane
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 from light_classification.tl_classifier import TLClassifier
+from light_classification.tl_classifier_yolo import TLClassifierYolo
 import tf
 import cv2
 import yaml
@@ -14,7 +15,7 @@ import yaml
 from scipy.spatial import KDTree
 import math
 import numpy as np
-STATE_COUNT_THRESHOLD = 3
+STATE_COUNT_THRESHOLD = 1
 
 class TLDetector(object):
     def __init__(self):
@@ -46,7 +47,13 @@ class TLDetector(object):
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
 
         self.bridge = CvBridge()
-        self.light_classifier = TLClassifier()
+        #self.light_classifier = TLClassifier()
+        if self.config['is_site']:
+            print("Using the real world detector")
+            self.light_classifier = TLClassifierYolo(config_path = "./light_classification/config_traffic_real.json")
+        else:
+            print("Using the sim world detector")
+            self.light_classifier = TLClassifierYolo(config_path = "./light_classification/config_traffic_sim.json")
         self.listener = tf.TransformListener()
 
         self.state = TrafficLight.UNKNOWN
@@ -87,6 +94,7 @@ class TLDetector(object):
         used.
         '''
         if self.state != state:
+            print(state)
             self.state_count = 0
             self.state = state
         elif self.state_count >= STATE_COUNT_THRESHOLD:
