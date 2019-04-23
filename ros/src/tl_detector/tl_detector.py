@@ -144,7 +144,7 @@ class TLDetector(object):
 
         self.camera_image.encoding = "rgb8"
         cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
-        
+       
         # to lower latency skip  images 
         self.image_count = self.image_count +1  
 
@@ -152,12 +152,7 @@ class TLDetector(object):
             return self.light_classifier.get_classification(cv_image) 
         else:
             return self.state
-            
 
-            
-
-        #Get classification
-        
      
        
        
