@@ -1,7 +1,10 @@
-Team FastCar:
-Madhu Hegde madhu.hegde@gmail.com
-Mengmei Liu mengmei.liu@gmail.com
-William Benjamin benjamin.william@gmail.com
+**Team FastCar**:
+
+| Name | Email |
+|-------|-------|
+| Madhu Hegde | madhu.hegde@gmail.com |
+| Mengmei Liu | mengmei.liu@gmail.com |
+| William Benjamin | benjamin.william@gmail.com |
 
 
 
