@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import copy
 
+# code originally from https://github.com/experiencor/keras-yolo3
+
 def _rand_scale(scale):
     scale = np.random.uniform(1, scale)
     return scale if (np.random.randint(2) == 0) else 1./scale;

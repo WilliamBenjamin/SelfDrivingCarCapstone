@@ -4,6 +4,7 @@ import os
 from .bbox import BoundBox, bbox_iou
 from scipy.special import expit
 
+# code originally from https://github.com/experiencor/keras-yolo3
 def _sigmoid(x):
     return expit(x)
 

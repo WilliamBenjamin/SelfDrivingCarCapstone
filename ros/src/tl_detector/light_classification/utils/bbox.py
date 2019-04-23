@@ -3,6 +3,8 @@ import os
 import cv2
 from .colors import get_color
 
+# code originally from https://github.com/experiencor/keras-yolo3
+
 class BoundBox:
     def __init__(self, xmin, ymin, xmax, ymax, c = None, classes = None):
         self.xmin = xmin

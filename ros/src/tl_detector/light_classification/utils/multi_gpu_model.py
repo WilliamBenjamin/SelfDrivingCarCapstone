@@ -2,6 +2,9 @@ from keras.layers import Lambda, concatenate
 from keras.models import Model
 import tensorflow as tf
 
+
+# code originally from https://github.com/experiencor/keras-yolo3
+
 def multi_gpu_model(model, gpus):
     if isinstance(gpus, (list, tuple)):
         num_gpus = len(gpus)
